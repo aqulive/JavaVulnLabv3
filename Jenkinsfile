@@ -5,7 +5,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
     }
-    node {
+    stages {
         stage('SCM') {
             git 'https://github.com/aqulive/JavaVulnLabv3.git'
         }
@@ -14,8 +14,6 @@ pipeline {
             sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
             }
         }
-    }
-    node {
         stage ('Test'){
             echo 'Hey'
         }
