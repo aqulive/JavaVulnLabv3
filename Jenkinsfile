@@ -1,19 +1,29 @@
 pipeline {
     agent any
-    
-    stages{
+    stages {
         stage('SCM') {
-            steps{
+            steps {
                 git url: 'https://github.com/aqulive/JavaVulnLabv3.git'
             }
         }
-        stage('SonarQube analysis') {
-            withSonarQubeEnv(credentialsId: 'b1973be2-ddb5-42c7-b02a-465099ea237d', installationName: 'My SonarQube Server') { // You can override the credential to be used
-            sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+        stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('My SonarQube Server') {
+                    // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
             }
         }
-        stage('Test'){
-            echo 'Hey'
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
         }
     }
 }
