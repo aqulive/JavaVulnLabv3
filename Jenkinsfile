@@ -4,7 +4,7 @@ node {
     }
  
     stage ('Build') {
-        def mvnHome = tool 'mvn-default'
+        def mvnHome = tool 'M3'
  
         sh "${mvnHome}/bin/mvn --batch-mode -V -U -e clean test -Dsurefire.useFile=false"
  
@@ -18,7 +18,7 @@ node {
     }
  
     stage ('Analysis') {
-        def mvnHome = tool 'mvn-default'
+        def mvnHome = tool 'M3'
  
         sh "${mvnHome}/bin/mvn -batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs"
  
