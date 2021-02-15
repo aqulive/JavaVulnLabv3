@@ -22,19 +22,19 @@ node {
  
         sh "${mvnHome}/bin/mvn -batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs"
  
-        def checkstyle = scanForIssues tool: [$class: 'CheckStyle'], pattern: '**/target/checkstyle-result.xml'
+        def checkstyle = scanForIssues tool: checkStyle(pattern: '**/target/checkstyle-result.xml')
         publishIssues issues:[checkstyle]
     
-        def pmd = scanForIssues tool: [$class: 'Pmd'], pattern: '**/target/pmd.xml'
+        def pmd = scanForIssues tool: pmd(pattern: '**/target/pmd.xml')
         publishIssues issues:[pmd]
          
-        def cpd = scanForIssues tool: [$class: 'Cpd'], pattern: '**/target/cpd.xml'
+        def cpd = scanForIssues tool: cpd(pattern: '**/target/cpd.xml')
         publishIssues issues:[cpd]
          
-        def findbugs = scanForIssues tool: [$class: 'FindBugs'], pattern: '**/target/findbugsXml.xml'
+        def findbugs = scanForIssues tool: findBugs(pattern: '**/target/findbugsXml.xml')
         publishIssues issues:[findbugs]
  
-        def spotbugs = scanForIssues tool: [$class: 'SpotBugs'], pattern: '**/target/spotbugsXml.xml'
+        def spotbugs = scanForIssues tool: spotBugs(pattern: '**/target/spotbugsXml.xml')
         publishIssues issues:[spotbugs]
     }
 }
