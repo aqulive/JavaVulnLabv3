@@ -1,6 +1,4 @@
-pipeline {
-    agent any
-
+node {
     stage ('Checkout') {
         git 'https://github.com/aqulive/JavaVulnLabv3.git'
     }
