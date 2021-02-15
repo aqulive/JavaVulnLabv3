@@ -10,8 +10,8 @@ node {
  
         junit testResults: '**/target/surefire-reports/TEST-*.xml'
  
-        def java = scanForIssues tool: [$class: 'Java']
-        def javadoc = scanForIssues tool: [$class: 'JavaDoc']
+        def java = scanForIssues tool 'Java'
+        def javadoc = scanForIssues tool 'JavaDoc'
          
         publishIssues issues:[java]
         publishIssues issues:[javadoc]
