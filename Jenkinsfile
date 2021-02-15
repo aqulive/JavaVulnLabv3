@@ -5,7 +5,6 @@ pipeline {
 			steps {
 				git branch: "master",
 					url: "https://github.com/aqulive/PythonVuln.git"
-				sh "ls"
 			}
 		}
 		stage ("Python Flask Prepare"){
