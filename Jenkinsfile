@@ -40,4 +40,3 @@ pipeline {
         publishIssues issues:[spotbugs]
     }
 }
-}
