@@ -9,13 +9,13 @@ pipeline {
 		}
 		stage ("Python Flask Prepare"){
 			steps {
-				sh "pip install -r requirements.txt"
+				sh "pip3 install -r requirements.txt"
 			}
 
 		}
 		stage ("Unit Test"){
 			steps{
-				sh "python test_basic.py"
+				sh "python3 test_basic.py"
 			}
 		}
 		stage ("Python Bandit Security Scan"){
