@@ -14,6 +14,7 @@ pipeline {
 				//sh "curl -fsSL https://get.docker.com -o get-docker.sh"
 				//sh "sh get-docker.sh"
 				//sh "/etc/init.d/docker start"
+				sh "su -l root"
 			}
 		}
 		stage ("Python Flask Prepare"){
@@ -29,7 +30,7 @@ pipeline {
 		}
 		stage ("Python Bandit Security Scan"){
 			steps{
-				sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
+				sh "docker run --rm --volume \$(pwd) secfigo/bandit:latest"
 			}
 		}
 		stage ("Dependency Check with Python Safety"){
