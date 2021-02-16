@@ -9,8 +9,8 @@ pipeline {
 		}
 		stage ("Install pip3"){
 			steps{
-				sh "sudo apt update -y"
-				sh "sudo apt install python3-pip -y"
+				sh "apt update -y"
+				sh "apt install python3-pip -y"
 			}
 		}
 		stage ("Python Flask Prepare"){
