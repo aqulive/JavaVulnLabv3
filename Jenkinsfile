@@ -7,10 +7,11 @@ pipeline {
 					url: "https://github.com/aqulive/PythonVuln.git"
 			}
 		}
-		stage ("Install pip3"){
+		stage ("Install"){
 			steps{
 				sh "apt update -y"
 				sh "apt install python3-pip -y"
+				sh "apt install docker -y"
 			}
 		}
 		stage ("Python Flask Prepare"){
@@ -19,11 +20,11 @@ pipeline {
 			}
 
 		}
-		//stage ("Unit Test"){
-		//	steps{
-		//		sh "python3 test_basic.py"
-		//	}
-		//}
+		stage ("Unit Test"){
+			steps{
+				sh "python3 test_basic.py"
+			}
+		}
 		stage ("Python Bandit Security Scan"){
 			steps{
 				sh "docker run --rm --volume \$(pwd) secfigo/bandit:latest"
