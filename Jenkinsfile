@@ -11,9 +11,11 @@ pipeline {
 			steps{
 				sh "apt update -y"
 				sh "apt install python3-pip -y"
-				sh "curl -fsSL https://get.docker.com -o get-docker.sh"
-				sh "sh get-docker.sh"
-				sh "/etc/init.d/docker start"
+				//sh "curl -fsSL https://get.docker.com -o get-docker.sh"
+				//sh "sh get-docker.sh"
+				//sh "/etc/init.d/docker start"
+				sh "systemctl enable docker"
+				sh "service docker start"
 			}
 		}
 		stage ("Python Flask Prepare"){
