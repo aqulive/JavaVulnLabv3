@@ -14,8 +14,9 @@ pipeline {
 				//sh "curl -fsSL https://get.docker.com -o get-docker.sh"
 				//sh "sh get-docker.sh"
 				//sh "/etc/init.d/docker start"
-				sh "systemctl enable docker"
-				sh "service docker start"
+				//*sh "systemctl enable docker"
+				//*sh "service docker start"
+				sh "systemctl restart docker"
 			}
 		}
 		stage ("Python Flask Prepare"){
