@@ -11,7 +11,7 @@ pipeline {
 			steps{
 				sh "apt update -y"
 				sh "apt install python3-pip -y"
-				sh "apt install docker-ce docker-ce-cli -containerd.io -y"
+				sh "apt install docker-ce docker-ce-cli containerd.io -y"
 			}
 		}
 		stage ("Python Flask Prepare"){
