@@ -14,10 +14,10 @@ pipeline {
 				sh "apt install sudo"
 				//sh "curl -fsSL https://get.docker.com -o get-docker.sh"
 				//sh "sh get-docker.sh"
-				//sh "service docker stop"
-				//sh "nohup docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock &"
-				//sh "service docker start"
-				//sh "usermod -aG docker jenkins"
+				sh "sudo service docker stop"
+				sh "sudo nohup docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock &"
+				sh "sudo service docker start"
+				sh "sudo usermod -aG docker jenkins"
 			}
 		}
 		stage ("Python Flask Prepare"){
