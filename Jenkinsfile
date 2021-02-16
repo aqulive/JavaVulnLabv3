@@ -16,8 +16,7 @@ pipeline {
 				//sh "service docker stop"
 				//sh "nohup docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock &"
 				//sh "service docker start"
-				//sh "usermod -aG docker"
-				sh "cat /etc/passwd"
+				sh "usermod -aG docker jenkins"
 			}
 		}
 		stage ("Python Flask Prepare"){
