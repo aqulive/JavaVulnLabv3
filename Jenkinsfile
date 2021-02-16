@@ -16,7 +16,7 @@ pipeline {
 				//sh "/etc/init.d/docker start"
 				//*sh "systemctl enable docker"
 				//*sh "service docker start"
-				sh "systemctl restart docker"
+				sh "service docker restart"
 			}
 		}
 		stage ("Python Flask Prepare"){
