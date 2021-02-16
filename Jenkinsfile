@@ -11,13 +11,14 @@ pipeline {
 			steps{
 				sh "apt update -y"
 				sh "apt install python3-pip -y"
-				sh "apt install sudo"
+				sh "sudo apt install docker.ce"
+				//sh "apt install sudo"
 				//sh "curl -fsSL https://get.docker.com -o get-docker.sh"
 				//sh "sh get-docker.sh"
 				//sh "sudo service docker stop"
-				sh "sudo nohup docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock &"
-				sh "sudo service docker start"
-				sh "sudo usermod -aG docker jenkins"
+				//sh "sudo nohup docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock &"
+				//sh "sudo service docker start"
+				//sh "sudo usermod -aG docker jenkins"
 			}
 		}
 		stage ("Python Flask Prepare"){
