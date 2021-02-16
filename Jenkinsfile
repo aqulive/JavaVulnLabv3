@@ -13,7 +13,7 @@ pipeline {
 				sh "apt install python3-pip -y"
 				sh "curl -fsSL https://get.docker.com -o get-docker.sh"
 				sh "sh get-docker.sh"
-				sh "systemctl start docker.service"
+				sh "systemctl start docker"
 			}
 		}
 		stage ("Python Flask Prepare"){
