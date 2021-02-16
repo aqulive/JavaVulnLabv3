@@ -7,6 +7,11 @@ pipeline {
 					url: "https://github.com/aqulive/PythonVuln.git"
 			}
 		}
+		stage ("Install pip3"){
+			steps{
+				sh "apt-get install pip3 -y"
+			}
+		}
 		stage ("Python Flask Prepare"){
 			steps {
 				sh "pip3 install -r requirements.txt"
