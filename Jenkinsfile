@@ -11,14 +11,7 @@ pipeline {
 			steps{
 				sh "apt update -y"
 				sh "apt install python3-pip -y"
-				sh "sudo apt install docker.ce"
-				//sh "apt install sudo"
-				//sh "curl -fsSL https://get.docker.com -o get-docker.sh"
-				//sh "sh get-docker.sh"
-				//sh "sudo service docker stop"
-				//sh "sudo nohup docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock &"
-				//sh "sudo service docker start"
-				//sh "sudo usermod -aG docker jenkins"
+				sh "pip3 install bandit"
 			}
 		}
 		stage ("Python Flask Prepare"){
@@ -34,7 +27,8 @@ pipeline {
 		}
 		stage ("Python Bandit Security Scan"){
 			steps{
-				sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
+				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
+				sh "sudo bandit -r \$(pwd)"
 			}
 		}
 		stage ("Dependency Check with Python Safety"){
