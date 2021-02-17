@@ -38,14 +38,14 @@ pipeline {
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
 				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check --json > report.json"
-				sh "safety check -r /var/jenkins_home/workspace/securitytesting/movie.py"
-				sh "safety check -r /var/jenkins_home/workspace/securitytesting/movie.py --json > report.json"
+				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/movie.py"
+				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/movie.py --json > report.json"
 			}
 		}
 		stage ("Static Analysis with python-taint"){
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) vickyrajagopal/python-taint-docker pyt ."
-				sh "python3 -m pyt \$(pwd)"
+				sh "python3 -m pyt targets \$(pwd)"
 			}
 		}					
 	}
