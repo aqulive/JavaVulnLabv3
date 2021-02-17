@@ -30,7 +30,7 @@ pipeline {
 		stage ("Python Bandit Security Scan"){
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
-				sh "bandit -r \$(pwd)"
+				sh "bandit -r /var/jenkins_home/workspace/securitytesting > report.txt"
 			}
 		}
 		stage ("Dependency Check with Python Safety"){
