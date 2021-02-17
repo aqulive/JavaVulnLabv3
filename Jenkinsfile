@@ -28,12 +28,12 @@ pipeline {
 				sh "python3 test_basic.py"
 			}
 		}
-		stage ("Python Bandit Security Scan"){
-			steps{
+		//stage ("Python Bandit Security Scan"){
+			//steps{
 				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
-				sh "bandit -r \$(pwd)"
-			}
-		}
+				//sh "bandit -r \$(pwd)"
+			//}
+		//}
 		stage ("Dependency Check with Python Safety"){
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
