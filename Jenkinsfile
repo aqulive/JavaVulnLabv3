@@ -25,7 +25,7 @@ pipeline {
 		stage ("Python Bandit Security Scan"){
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
-				sh "bandit -r /var/jenkins_home/workspace/securitytesting/movie.py > report.txt"
+				sh "bandit -r /var/jenkins_home/workspace/securitytesting/bad/* > report.txt"
 				sh "cat report.txt"
 			}
 		}
@@ -33,8 +33,8 @@ pipeline {
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
 				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check --json > report.json"
-				sh "safety check -r /var/jenkins_home/workspace/securitytesting/movie.py"
-				sh "safety check -r /var/jenkins_home/workspace/securitytesting/movie.py --json > report.json"
+				sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/*"
+				sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/* --json > report.json"
 			}
 		}					
 	}
