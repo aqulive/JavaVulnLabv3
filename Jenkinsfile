@@ -11,9 +11,6 @@ pipeline {
 			steps{
 				sh "apt update -y"
 				sh "apt install python3-pip -y"
-				sh "pip3 install bandit"
-				sh "pip3 install safety"
-				sh "pip3 install insecure-package"
 			}
 		}
 		stage ("Python Flask Prepare"){
@@ -25,8 +22,10 @@ pipeline {
 		stage ("Python Bandit Security Scan"){
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
-				sh "bandit -r /var/jenkins_home/workspace/securitytesting/bad/* > report.txt"
-				sh "cat report.txt"
+				sh "bandit -r /var/jenkins_home/workspace/securitytesting/bad/vulpy.py > reportvulpy.py.txt"
+				sh "bandit -r /var/jenkins_home/workspace/securitytesting/bad/vulpy-ssl.py > reportvulpy-ssl.py.txt"
+				sh "cat ./reportvulpy.txt"
+				sh "cat ./reportvulpy-ssl.txt"
 			}
 		}
 		stage ("Dependency Check with Python Safety"){
