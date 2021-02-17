@@ -8,6 +8,8 @@ dulwich
 python-git-secrets
 safety
 bandit
+safety
+insecure-package
 python-taint
 pylint
 geoip2
