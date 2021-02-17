@@ -31,7 +31,7 @@ pipeline {
 		stage ("Python Bandit Security Scan"){
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
-				sh "sudo bandit -r \$(pwd)"
+				sh "bandit -r \$(pwd)"
 			}
 		}
 		stage ("Dependency Check with Python Safety"){
