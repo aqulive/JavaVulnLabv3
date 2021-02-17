@@ -11,10 +11,9 @@ pipeline {
 			steps{
 				sh "apt update -y"
 				sh "apt install python3-pip -y"
-				//sh "pip3 install bandit"
-				//sh "pip3 install safety"
-				//sh "pip3 install insecure-package"
-				//sh "pip3 install python-taint"
+				sh "pip3 install bandit"
+				sh "pip3 install safety"
+				sh "pip3 install insecure-package"
 			}
 		}
 		stage ("Python Flask Prepare"){
@@ -28,24 +27,18 @@ pipeline {
 				sh "python3 test_basic.py"
 			}
 		}
-		//stage ("Python Bandit Security Scan"){
-			//steps{
+		stage ("Python Bandit Security Scan"){
+			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
-				//sh "bandit -r \$(pwd)"
-			//}
-		//}
-		//stage ("Dependency Check with Python Safety"){
-			//steps{
+				sh "bandit -r \$(pwd)"
+			}
+		}
+		stage ("Dependency Check with Python Safety"){
+			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
 				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check --json > report.json"
-				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/movie.py"
-				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/movie.py --json > report.json"
-			//}
-		//}
-		stage ("Static Analysis with python-taint"){
-			steps{
-				//sh "sudo docker run --rm --volume \$(pwd) vickyrajagopal/python-taint-docker pyt ."
-				sh "python3 -m tests /var/jenkins_home/workspace/securitytesting"
+				sh "safety check -r /var/jenkins_home/workspace/securitytesting/movie.py"
+				sh "safety check -r /var/jenkins_home/workspace/securitytesting/movie.py --json > report.json"
 			}
 		}					
 	}
