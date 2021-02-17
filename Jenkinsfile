@@ -45,7 +45,7 @@ pipeline {
 		stage ("Static Analysis with python-taint"){
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) vickyrajagopal/python-taint-docker pyt ."
-				sh "python3 -m pyt targets /var/jenkins_home/workspace/securitytesting/movie.py"
+				sh "python3 -m pyt /var/jenkins_home/workspace/securitytesting/movie.py"
 			}
 		}					
 	}
