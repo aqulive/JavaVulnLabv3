@@ -22,11 +22,6 @@ pipeline {
 			}
 
 		}
-		stage ("Unit Test"){
-			steps{
-				sh "python3 test_basic.py"
-			}
-		}
 		stage ("Python Bandit Security Scan"){
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
