@@ -23,9 +23,9 @@ pipeline {
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
 				//sh "bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*"
-				script: ''' @echo off
-                            bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*" 
-                            IF %ERRORLEVEL% EQU 1 (exit /B 0) ELSE (exit /B 1)'''
+				 sh ''' @echo off
+                        bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*" 
+                        IF %ERRORLEVEL% EQU 1 (exit /B 0) ELSE (exit /B 1)'''
 			}
 		}
 		stage ("Dependency Check with Python Safety"){
