@@ -29,12 +29,10 @@ pipeline {
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
 				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check --json > report.json"
-				sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/vulpy.py"
-				sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/vulpy.py --json > reportvulnpy.json"
-				sh "cat ./reportvulnpy.json"
-				sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/vulpy-ssl.py"
-				sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/vulpy-ssl.py --json > reportvulnpy-ssl.json"
-				sh "cat ./reportvulnpy-ssl.json"
+				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/*"
+				sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/* --json > ./reportsafety.json"
+				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/vulpy-ssl.py"
+				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/vulpy-ssl.py --json > reportvulnpy-ssl.json"
 			}
 		}					
 	}
