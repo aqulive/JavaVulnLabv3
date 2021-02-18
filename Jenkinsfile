@@ -22,7 +22,7 @@ pipeline {
 		stage ("Python Bandit Security Scan"){
 			steps{
 				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
-				sh "bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*"
+				sh "bandit +e -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*"
 			}
 		}
 		stage ("Dependency Check with Python Safety"){
