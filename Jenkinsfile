@@ -8,34 +8,31 @@ pipeline {
 			}
 		}
 		stage ("Install"){
-			steps{
-				sh "apt update -y"
-				sh "apt install python3-pip -y"
-			}
-		}
-		stage ("Python Flask Prepare"){
 			steps {
 				sh "pip3 install -r requirements.txt"
 			}
 
 		}
-		stage ("Python Bandit Security Scan"){
+		/*stage ("Python Bandit Security Scan"){
 			steps{
-				//sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
-				//sh "bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*"
-				 sh  "bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*
-                        IF %ERRORLEVEL% EQU 1 (exit /B 0) ELSE (exit /B 1)"
+				sh "bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*"
+			}
+		}*/
+		stage ("Dependency Check"){
+			steps{
+				dependencyCheck additionalArguments: ''' 
+                    -o "./" 
+                    -s "./"
+                    -f "ALL" 
+                    --prettyPrint''', odcInstallation: 'OWASP-DC'
+
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
 			}
 		}
-		stage ("Dependency Check with Python Safety"){
+		/*stage ("Dependency Check with Python Safety"){
 			steps{
-				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
-				//sh "sudo docker run --rm --volume \$(pwd) pyupio/safety:latest safety check --json > report.json"
-				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/*"
 				sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/* --json > ./reportsafety.json"
-				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/vulpy-ssl.py"
-				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/vulpy-ssl.py --json > reportvulnpy-ssl.json"
 			}
-		}					
+		}*/					
 	}
 }
