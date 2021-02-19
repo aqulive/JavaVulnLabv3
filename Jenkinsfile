@@ -28,6 +28,8 @@ pipeline {
 				sh "sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable\""
 				sh "sudo apt update"
 				sh "apt-cache policy docker-ce"
+				sh "curl -O https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/containerd.io_1.4.3-1_amd64.deb"
+				sh "sudo apt install ./containerd.io_1.4.3-1_amd64.deb"
 				sh "sudo apt install docker-ce -y"
 				sh "sudo systemctl status docker"
 				sh "sudo usermod -aG docker jenkins"
