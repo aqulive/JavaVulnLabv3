@@ -28,12 +28,13 @@ pipeline {
 				sh "sudo apt install docker-ce -y"
 				sh "sudo service docker start"
 				sh "sudo usermod -aG docker jenkins"
+				sh "dockerd"
 			}
 		}
 		stage ("Python Bandit Security Scan"){
 			steps{
 				//sh "bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*"
-				sh "dockerd run --rm --volume \$(pwd) secfigo/bandit:latest"
+				sh "docker run --rm --volume \$(pwd) secfigo/bandit:latest"
 			}
 		}
 		/*stage ("Dependency Check"){
