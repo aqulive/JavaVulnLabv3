@@ -9,6 +9,9 @@ pipeline {
 		}
 		stage ("Install"){
 			steps {
+				sh "apt update"
+				sh "apt install sudo"
+				sh "sudo apt install python3-pip"
 				sh "pip3 install -r requirements.txt"
 			}
 		}
