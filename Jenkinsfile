@@ -33,7 +33,7 @@ pipeline {
 		stage ("Python Bandit Security Scan"){
 			steps{
 				//sh "bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*"
-				sh "docker run --rm --volume \$(pwd) secfigo/bandit:latest"
+				sh "dockerd run --rm --volume \$(pwd) secfigo/bandit:latest"
 			}
 		}
 		/*stage ("Dependency Check"){
