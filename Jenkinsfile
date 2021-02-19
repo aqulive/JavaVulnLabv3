@@ -15,11 +15,6 @@ pipeline {
 				sh "pip3 install -r requirements.txt"
 			}
 		}
-		/*stage ("Python Bandit Security Scan"){
-			steps{
-				sh "bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*"
-			}
-		}*/
 		stage("docker"){
 			steps{
 				sh "sudo apt update"
@@ -35,6 +30,12 @@ pipeline {
 				sh "sudo usermod -aG docker jenkins"
 			}
 		}
+		stage ("Python Bandit Security Scan"){
+			steps{
+				//sh "bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*"
+				sh "docker run --rm --volume \$(pwd) secfigo/bandit:latest"
+			}
+		}
 		/*stage ("Dependency Check"){
 			steps{
 				dependencyCheck additionalArguments: ''' 
@@ -46,10 +47,17 @@ pipeline {
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
 			}
 		}*/
-		/*stage ("Dependency Check with Python Safety"){
+		stage ("Dependency Check with Python Safety"){
 			steps{
-				sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/* --json > ./reportsafety.json"
+				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/* --json > ./reportsafety.json"
+				sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
+				sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check --json > report.json"
 			}
-		}*/				
+		}
+		stage ("Static Analysis with python-taint"){
+			steps{
+				sh "docker run --rm --volume \$(pwd) vickyrajagopal/python-taint-docker pyt ."
+			}
+		}				
 	}
 }
