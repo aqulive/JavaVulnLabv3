@@ -31,7 +31,7 @@ pipeline {
 				sh "curl -O https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/containerd.io_1.4.3-1_amd64.deb"
 				sh "sudo apt install ./containerd.io_1.4.3-1_amd64.deb"
 				sh "sudo apt install docker-ce -y"
-				sh "sudo systemctl status docker"
+				sh "sudo service docker start"
 				sh "sudo usermod -aG docker jenkins"
 			}
 		}
