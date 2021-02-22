@@ -15,7 +15,7 @@ pipeline {
 				sh "pip3 install -r requirements.txt"
 			}
 		}
-		stage("docker"){
+		/*stage("docker"){
 			steps{
 				sh "sudo apt update"
 				sh "sudo apt install apt-transport-https ca-certificates curl software-properties-common -y"
@@ -30,7 +30,7 @@ pipeline {
 				sh "sudo usermod -aG docker jenkins"
 				sh "dockerd"
 			}
-		}
+		}*/
 		stage ("Python Bandit Security Scan"){
 			steps{
 				//sh "bandit -f json -o ./reportbandit.json -r /var/jenkins_home/workspace/securitytesting/bad/*"
@@ -53,11 +53,6 @@ pipeline {
 				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/* --json > ./reportsafety.json"
 				sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
 				sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check --json > report.json"
-			}
-		}
-		stage ("Static Analysis with python-taint"){
-			steps{
-				sh "docker run --rm --volume \$(pwd) vickyrajagopal/python-taint-docker pyt ."
 			}
 		}				
 	}
