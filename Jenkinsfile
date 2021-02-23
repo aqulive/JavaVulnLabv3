@@ -37,7 +37,7 @@ pipeline {
 				sh "sudo docker run --rm --volume \$(pwd) secfigo/bandit:latest"
 			}
 		}
-		/*stage ("Dependency Check"){
+		stage ("Dependency Check"){
 			steps{
 				dependencyCheck additionalArguments: ''' 
                     -o "./" 
@@ -47,7 +47,7 @@ pipeline {
 
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
 			}
-		}*/
+		}
 		stage ("Dependency Check with Python Safety"){
 			steps{
 				//sh "safety check -r /var/jenkins_home/workspace/securitytesting/bad/* --json > ./reportsafety.json"
